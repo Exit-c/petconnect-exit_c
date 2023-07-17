@@ -1,34 +1,55 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
+import { ActionCodeURL } from 'firebase/auth';
+import { DocumentData } from 'firebase/firestore';
 
 // Define a type for the slice state
-interface CounterState {
-  value: number;
+interface CommunityState {
+  checkedCategory: string;
+  title: string;
+  content: string;
+  imgPreviews: string[];
+  userWriteData: DocumentData[];
 }
 
 // Define the initial state using that type
-const initialState: CounterState = {
-  value: 0,
+const initialState: CommunityState = {
+  checkedCategory: '강아지',
+  title: '',
+  content: '',
+  imgPreviews: [],
+  userWriteData: [],
 };
 
-export const counterSlice = createSlice({
-  name: 'counter',
+const communitySlice = createSlice({
+  name: 'community',
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    setCheckedCategory(state, action: PayloadAction<string>) {
+      state.checkedCategory = action.payload;
     },
-    decrement: (state) => {
-      state.value -= 1;
+    setTitle(state, action: PayloadAction<string>) {
+      state.title = action.payload;
     },
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    setContent(state, action: PayloadAction<string>) {
+      state.content = action.payload;
+    },
+    setImgPreviews(state, action: PayloadAction<string[]>) {
+      state.imgPreviews = action.payload;
+    },
+    setUserWriteData(state, action: PayloadAction<DocumentData[]>) {
+      state.userWriteData = action.payload;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const {
+  setCheckedCategory,
+  setTitle,
+  setContent,
+  setImgPreviews,
+  setUserWriteData,
+} = communitySlice.actions;
 
-export default counterSlice.reducer;
+export default communitySlice.reducer;

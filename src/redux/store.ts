@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import communitySlice from './reducers/communityReducer';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    community: communitySlice,
+  },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -350,7 +350,7 @@ const Community = () => {
     };
 
     getUserWrite();
-  }, [radio, showDisplay]);
+  }, [radio]);
 
   return (
     <StyleCommunity>

@@ -189,7 +189,7 @@ const Writing = () => {
       const userSnapshot = await getDoc(userDoc);
       const data = userSnapshot.data();
 
-      Promise.all(uploadTasks).then(async (snapshots) => {
+      await Promise.all(uploadTasks).then(async (snapshots) => {
         // 모든 이미지 파일 업로드가 완료된 경우
         const downloadURLs = await Promise.all(
           snapshots.map((snapshot) => getDownloadURL(snapshot.ref))

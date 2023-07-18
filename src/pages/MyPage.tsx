@@ -10,6 +10,7 @@ import {
   collection,
   query,
   where,
+  deleteDoc,
 } from 'firebase/firestore';
 import cat from '../images/animal-2029245_640.png';
 
@@ -87,6 +88,20 @@ const StyleMyPage = styled.div`
     margin-top: 10px;
     background-color: #f7f791;
     font-size: 12px;
+    cursor: pointer;
+  }
+
+  .mypage-withdraw {
+    display: block;
+    float: right;
+    width: 20%;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    margin-top: 10px;
+    background-color: #fff;
+    font-size: 12px;
+    color: #999;
     cursor: pointer;
   }
 `;
@@ -236,6 +251,26 @@ const MyPage = () => {
     navigate('/login');
   };
 
+  // 회원탈퇴 클릭이벤트
+  const onWithdrawClick = async () => {
+    const user = authService.currentUser; // 현재 사용자
+
+    if (user) {
+      // Firestore에서 해당 사용자의 닉네임 문서 삭제
+      const userDoc = doc(dbService, 'userNickname', user.uid);
+      await deleteDoc(userDoc);
+
+      // 사용자 계정 삭제
+      await user.delete();
+
+      // 로그아웃
+      authService.signOut();
+      navigate('/login');
+    }
+
+    alert('회원탈퇴가 정상적으로 완료되었습니다');
+  };
+
   return (
     <>
       <StyleMyPage>
@@ -263,6 +298,9 @@ const MyPage = () => {
         <div className="mypage-line"></div>
         <button className="mypage-logout" onClick={onLogOutClick}>
           로그아웃
+        </button>
+        <button className="mypage-withdraw" onClick={onWithdrawClick}>
+          회원탈퇴
         </button>
       </StyleMyPage>
       {showModal && (

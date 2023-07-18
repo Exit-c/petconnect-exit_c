@@ -143,7 +143,7 @@ const Login = () => {
       provider = new GithubAuthProvider();
     }
     if (provider) {
-      const data = await signInWithPopup(authService, provider);
+      await signInWithPopup(authService, provider);
     }
     navigate('/');
   };
@@ -151,7 +151,7 @@ const Login = () => {
   return (
     <StyleLogin>
       <div className="puppy">
-        <img src={puppy} />
+        <img src={puppy} image-alt="강아지그림" />
       </div>
       <h2 className="login-title">로그인</h2>
       <form onSubmit={loginSubmit} className="login-form">

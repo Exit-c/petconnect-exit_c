@@ -175,8 +175,7 @@ const Community = () => {
   const navigete = useNavigate();
   const dispatch = useAppDispatch();
   const { userWriteData } = useAppSelector((state) => state.community);
-  // firestore의 데이터를 담는다
-  // const [userWriteData, setUserWriteData] = useState<DocumentData[]>([]);
+
   // 최신순, 내가작성한글 상태
   const [radio, setRadio] = useState<string>('최신순');
   // 검색 상태
@@ -351,7 +350,7 @@ const Community = () => {
     };
 
     getUserWrite();
-  }, [radio]);
+  }, [radio, showDisplay]);
 
   return (
     <StyleCommunity>

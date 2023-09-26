@@ -1,6 +1,6 @@
 반려동물 커뮤니티 프로젝트
 
-##기능 설명
+**#기능 설명**
 
 Firebase의 Authentication, Firestore, Storage 를 활용하여 구현
 

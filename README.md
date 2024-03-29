@@ -1,5 +1,9 @@
 반려동물 커뮤니티 프로젝트
 
+**#사용한 기술**
+
+React, Redux, typescript, styledComponent, firebase
+
 **#기능 설명**
 
 Firebase의 Authentication, Firestore, Storage 를 활용하여 구현
@@ -16,4 +20,4 @@ Firebase의 Authentication, Firestore, Storage 를 활용하여 구현
 
 - 내가 작성한 글 삭제기능
 
-- 검색 기능
+- 커뮤니티 게시글 검색 기능

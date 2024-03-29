@@ -2,7 +2,7 @@
 
 **#사용한 기술**
 
-React, Redux, typescript, styledComponent, firebase
+React, Redux, Typescript, StyledComponent, Firebase
 
 **#기능 설명**
 

@@ -289,9 +289,7 @@ const Writing = () => {
           <label htmlFor="uploadFile">
             <div>사진 첨부</div>
           </label>
-          <span className="uproad-info">
-            개당 업로드 용량 10MB이하, 사진 업로드 5개까지 가능합니다.
-          </span>
+          <span className="uproad-info">사진 업로드 5개까지 가능합니다.</span>
         </div>
         <div className="write-registerWrap">
           <button type="submit">글 등록</button>

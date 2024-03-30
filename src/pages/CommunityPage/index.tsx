@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { setUserWriteData } from '../redux/reducers/communityReducer';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { setUserWriteData } from '../../redux/reducers/communityReducer';
 import styled from 'styled-components';
-import search from '../images/free-icon-finder-4227126.png';
-import deleteIcon from '../images/370086_bin_delete_empty_out_recycle_icon.png';
-import { authService, dbService } from '../fbase';
+import search from '../../images/free-icon-finder-4227126.png';
+import deleteIcon from '../../images/370086_bin_delete_empty_out_recycle_icon.png';
+import { authService, dbService } from '../../fbase';
 import {
   getDocs,
   collection,

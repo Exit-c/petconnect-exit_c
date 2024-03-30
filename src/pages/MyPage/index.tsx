@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { authService, dbService } from '../fbase';
+import { authService, dbService } from '../../fbase';
 import {
   setDoc,
   doc,
@@ -12,7 +12,7 @@ import {
   where,
   deleteDoc,
 } from 'firebase/firestore';
-import cat from '../images/animal-2029245_640.png';
+import cat from '../../images/animal-2029245_640.png';
 
 const StyleMyPage = styled.div`
   width: 320px;
@@ -290,16 +290,21 @@ const MyPage = () => {
           <div></div>
         </div>
         <button
+          type="button"
           className="mypage-nicknameChange"
           onClick={onNicknameChangeClick}
         >
           닉네임 변경
         </button>
         <div className="mypage-line"></div>
-        <button className="mypage-logout" onClick={onLogOutClick}>
+        <button type="button" className="mypage-logout" onClick={onLogOutClick}>
           로그아웃
         </button>
-        <button className="mypage-withdraw" onClick={onWithdrawClick}>
+        <button
+          type="button"
+          className="mypage-withdraw"
+          onClick={onWithdrawClick}
+        >
           회원탈퇴
         </button>
       </StyleMyPage>
@@ -307,11 +312,11 @@ const MyPage = () => {
         <StyleMyPageModal>
           <img src={cat} alt="고양이" className="modal-img" />
           <form onSubmit={onSubmitNickname}>
-            <label htmlFor="닉네임" className="modal-label">
+            <label htmlFor="nickname" className="modal-label">
               닉네임
             </label>
             <input
-              id="닉네임"
+              id="nickname"
               type="text"
               placeholder="닉네임을 입력해주세요"
               className="modal-input"
@@ -323,7 +328,7 @@ const MyPage = () => {
               변경하기
             </button>
           </form>
-          <button onClick={onModalClose} className="modal-close">
+          <button type="button" onClick={onModalClose} className="modal-close">
             X
           </button>
         </StyleMyPageModal>

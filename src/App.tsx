@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Community from './pages/Community';
-import CommunityDetail from './pages/CommunityDetail';
-import Writing from './pages/Writing';
-import MyPage from './pages/MyPage';
-import Account from './pages/Account';
+import Home from './pages/HomePage/index';
+import Login from './pages/LoginPage/index';
+import Community from './pages/CommunityPage/index';
+import CommunityDetail from './pages/CommunityDetailPage/index';
+import Writing from './pages/WritingPage/index';
+import MyPage from './pages/MyPage/index';
+import Account from './pages/AcocountPage/index';
 import { authService } from './fbase';
 
 // color: #f7f791

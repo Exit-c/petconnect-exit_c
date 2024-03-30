@@ -1,14 +1,9 @@
 import React, { useState, ChangeEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import puppy from '../images/dog-ga9d6fbf94_640.png';
-import { authService } from '../fbase';
-import {
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  GithubAuthProvider,
-  signInWithPopup,
-} from 'firebase/auth';
+import puppy from '../../images/dog-ga9d6fbf94_640.png';
+import { authService } from '../../fbase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const StyleLogin = styled.div`
   width: 320px;
@@ -57,25 +52,6 @@ const StyleLogin = styled.div`
     }
   }
 
-  .account-box {
-    width: 100%;
-    button {
-      width: 100%;
-      height: 40px;
-      box-sizing: border-box;
-      margin-bottom: 10px;
-      background-color: #f7f791;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-
-      .account-link {
-        color: #000;
-        text-decoration: none;
-      }
-    }
-  }
-
   .sns-login {
     width: 100%;
     .sns-title {
@@ -92,11 +68,6 @@ const StyleLogin = styled.div`
       border-radius: 20px;
       background-color: #fff;
       cursor: pointer;
-      margin-bottom: 10px;
-    }
-    .github-login {
-      background-color: #02040a;
-      color: #fff;
     }
   }
 `;
@@ -115,15 +86,15 @@ const Login = () => {
   const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
-  // 이메일로그인 submit
-  const loginSubmit = async (event: React.MouseEvent<HTMLFormElement>) => {
+  const accountSubmit = async (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault();
     let data;
     try {
-      // 로그인
-      // signInWithEmailAndPassword()는 이메일과 비밀번호로 사용자 인증을 수행하는 메서드
-      data = await signInWithEmailAndPassword(authService, email, password);
-      navigate('/');
+      // 회원가입
+      // createUserWithEmailAndPassword()는 이메일과 비밀번호를 사용하여 새로운 사용자 계정을 생성하는 메서드
+      data = await createUserWithEmailAndPassword(authService, email, password);
+      // 페이지 이동
+      navigate('/login');
 
       console.log(data);
     } catch (error) {
@@ -131,30 +102,13 @@ const Login = () => {
       setErrorMessage((error as Error).message.replace('Firebase: ', '')); // replace()를 사용하여 'Firebase' 문자열을 ''로 대체
     }
   };
-  // 소셜로그인 클릭이벤트
-  const onSocialClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    const {
-      currentTarget: { name },
-    } = event;
-    let provider;
-    if (name === 'google') {
-      provider = new GoogleAuthProvider();
-    } else if (name === 'facebook') {
-      provider = new GithubAuthProvider();
-    }
-    if (provider) {
-      await signInWithPopup(authService, provider);
-    }
-    navigate('/');
-  };
-
   return (
     <StyleLogin>
       <div className="puppy">
-        <img src={puppy} image-alt="강아지그림" />
+        <img src={puppy} title="강아지이미지" />
       </div>
-      <h2 className="login-title">로그인</h2>
-      <form onSubmit={loginSubmit} className="login-form">
+      <h2 className="login-title">회원가입</h2>
+      <form onSubmit={accountSubmit} className="login-form">
         <input
           type="text"
           placeholder="이메일을 입력해주세요"
@@ -168,28 +122,8 @@ const Login = () => {
           value={password}
         />
         <span>{errorMessage}</span>
-        <input type="submit" value="로그인"></input>
+        <input type="submit" value="회원가입"></input>
       </form>
-      <div className="account-box">
-        <button>
-          <Link to="/account" className="account-link">
-            회원가입
-          </Link>
-        </button>
-      </div>
-      <div className="sns-login">
-        <h3 className="sns-title">간편 SNS 로그인</h3>
-        <button onClick={onSocialClick} name="google">
-          구글로 로그인
-        </button>
-        <button
-          onClick={onSocialClick}
-          name="facebook"
-          className="github-login"
-        >
-          깃허브로 로그인
-        </button>
-      </div>
     </StyleLogin>
   );
 };

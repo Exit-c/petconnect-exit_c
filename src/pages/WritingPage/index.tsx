@@ -1,14 +1,14 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
   setCheckedCategory,
   setContent,
   setImgPreviews,
   setTitle,
-} from '../redux/reducers/communityReducer';
+} from '../../redux/reducers/communityReducer';
 import { useNavigate } from 'react-router-dom';
-import { authService, dbService, storage } from '../fbase';
+import { authService, dbService, storage } from '../../fbase';
 import { doc, addDoc, getDoc, collection } from 'firebase/firestore';
 import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
 

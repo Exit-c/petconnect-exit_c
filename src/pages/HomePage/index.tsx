@@ -17,11 +17,11 @@ const StyleHome = styled.div`
     position: relative;
   }
   .pet-img01 {
-    background-image: url(${require('../images/dog-3389729_1280.jpg')});
+    background-image: url(${require('../../images/dog-3389729_1280.jpg')});
     border-radius: 10px 0 0 10px;
   }
   .pet-img02 {
-    background-image: url(${require('../images/cat-5098930_1280.jpg')});
+    background-image: url(${require('../../images/cat-5098930_1280.jpg')});
     border-radius: 0 10px 10px 0;
   }
   .pet-img01:after,

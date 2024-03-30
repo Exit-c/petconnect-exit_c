@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../redux/hooks';
-import { dbService } from '../fbase';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+import { dbService } from '../../fbase';
 import { query, collection, getDocs } from 'firebase/firestore';
-import { setUserWriteData } from '../redux/reducers/communityReducer';
+import { setUserWriteData } from '../../redux/reducers/communityReducer';
 
 const StyleCommunityDetail = styled.div`
   width: 970px;

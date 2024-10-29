@@ -4,7 +4,6 @@ import cat_img from "../../images/cat-5098930_1280.jpg";
 import dog_img from "../../images/dog-3389729_1280.jpg";
 
 const StyleHome = styled.div`
-  padding: 0 12px;
   .container {
     position: relative;
     display: flex;
@@ -40,7 +39,6 @@ const StyleHome = styled.div`
   }
 
   @media (min-width: 768px) {
-    padding: 0 20px;
     .container {
       position: relative;
       display: flex;

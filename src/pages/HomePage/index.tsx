@@ -1,58 +1,95 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import cat_img from "../../images/cat-5098930_1280.jpg";
+import dog_img from "../../images/dog-3389729_1280.jpg";
 
 const StyleHome = styled.div`
-  width: 970px;
-  margin: 0 auto;
-  position: relative;
+  padding: 0 12px;
+  .container {
+    position: relative;
+    display: flex;
+    width: 100%;
+  }
 
   .pet-img01,
   .pet-img02 {
     width: 50%;
-    height: 800px;
-    float: left;
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
+    img {
+      width: 100%;
+    }
   }
-  .pet-img01 {
-    background-image: url(${require('../../images/dog-3389729_1280.jpg')});
-    border-radius: 10px 0 0 10px;
-  }
-  .pet-img02 {
-    background-image: url(${require('../../images/cat-5098930_1280.jpg')});
-    border-radius: 0 10px 10px 0;
-  }
-  .pet-img01:after,
-  .pet-img02:after {
-    content: '';
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+
+  .community-botton {
+    width: 20vw;
+    height: 6vw;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 60vw;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f7f791;
+    border: none;
+    border-radius: 10px;
+    font-size: 2vw;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    .community-link {
+      color: #000;
+      text-decoration: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 0 20px;
+    .container {
+      position: relative;
+      display: flex;
+      width: 100%;
+    }
   }
 
   .position-box {
-    width: 300px;
-    height: auto;
     position: absolute;
-    top: 200px;
+    top: 15vw;
     left: 50%;
-    transform: translate(-50%, -50%); // 중간정렬
+    transform: translate(-50%, -50%);
 
     .pet-text {
       color: #fff;
-      font-size: 25px;
+      font-size: 2vw;
       text-align: center;
       span {
         display: block;
         text-align: center;
-        font-size: 35px;
-        margin-top: 10px;
+        font-size: 4vw;
+        margin-top: 1vw;
         font-weight: bold;
+      }
+    }
+  }
+
+  @media (min-width: 970px) {
+    width: 970px;
+    margin: 0 auto;
+    padding: 0;
+
+    .position-box {
+      position: absolute;
+      top: 200px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      .pet-text {
+        color: #fff;
+        font-size: 20px;
+        text-align: center;
+        span {
+          display: block;
+          text-align: center;
+          font-size: 36px;
+          margin-top: 12px;
+          font-weight: bold;
+        }
       }
     }
 
@@ -60,9 +97,9 @@ const StyleHome = styled.div`
       width: 200px;
       height: 50px;
       position: absolute;
-      top: 550px;
+      top: 600px;
       left: 50%;
-      transform: translate(-50%, -50%); // 중간정렬
+      transform: translate(-50%, -50%);
       background-color: #f7f791;
       border: none;
       border-radius: 10px;
@@ -81,12 +118,18 @@ const StyleHome = styled.div`
 const Home = () => {
   return (
     <StyleHome>
-      <div className="pet-img01"></div>
-      <div className="pet-img02"></div>
-      <div className="position-box">
-        <p className="pet-text">
-          반려인들의 소통공간 <span>Petconnect</span>
-        </p>
+      <div className="container">
+        <div className="pet-img01">
+          <img src={dog_img} alt="dog_image" />
+        </div>
+        <div className="pet-img02">
+          <img src={cat_img} alt="cat_image" />
+        </div>
+        <div className="position-box">
+          <p className="pet-text">
+            반려인들의 소통공간 <span>Petconnect</span>
+          </p>
+        </div>
         <button className="community-botton">
           <Link to="/community" className="community-link">
             community

@@ -1,9 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
-import { ActionCodeURL } from 'firebase/auth';
-import { DocumentData } from 'firebase/firestore';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { DocumentData } from "firebase/firestore";
 
-// Define a type for the slice state
 interface CommunityState {
   checkedCategory: string;
   title: string;
@@ -12,18 +9,16 @@ interface CommunityState {
   userWriteData: DocumentData[];
 }
 
-// Define the initial state using that type
 const initialState: CommunityState = {
-  checkedCategory: '강아지',
-  title: '',
-  content: '',
+  checkedCategory: "강아지",
+  title: "",
+  content: "",
   imgPreviews: [],
   userWriteData: [],
 };
 
 const communitySlice = createSlice({
-  name: 'community',
-  // `createSlice` will infer the state type from the `initialState` argument
+  name: "community",
   initialState,
   reducers: {
     setCheckedCategory(state, action: PayloadAction<string>) {

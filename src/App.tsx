@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import Navigation from './components/Navigation';
-import Home from './pages/HomePage/index';
-import Login from './pages/LoginPage/index';
-import Community from './pages/CommunityPage/index';
-import CommunityDetail from './pages/CommunityDetailPage/index';
-import Writing from './pages/WritingPage/index';
-import MyPage from './pages/MyPage/index';
-import Account from './pages/AcocountPage/index';
-import { authService } from './fbase';
-
-// color: #f7f791
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import Navigation from "./components/Navigation";
+import Home from "./pages/HomePage/index";
+import Login from "./pages/LoginPage/index";
+import Community from "./pages/CommunityPage/index";
+import CommunityDetail from "./pages/CommunityDetailPage/index";
+import Writing from "./pages/WritingPage/index";
+import MyPage from "./pages/MyPage/index";
+import Account from "./pages/AcocountPage/index";
+import { authService } from "./fbase";
 
 const App: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);

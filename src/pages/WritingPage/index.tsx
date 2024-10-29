@@ -1,16 +1,16 @@
-import React, { useRef, useState } from 'react';
-import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import React, { useRef, useState } from "react";
+import styled from "styled-components";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   setCheckedCategory,
   setContent,
   setImgPreviews,
   setTitle,
-} from '../../redux/reducers/communityReducer';
-import { useNavigate } from 'react-router-dom';
-import { authService, dbService, storage } from '../../fbase';
-import { doc, addDoc, getDoc, collection } from 'firebase/firestore';
-import { uploadBytes, ref, getDownloadURL } from 'firebase/storage';
+} from "../../redux/reducers/communityReducer";
+import { useNavigate } from "react-router-dom";
+import { authService, dbService, storage } from "../../fbase";
+import { doc, addDoc, getDoc, collection } from "firebase/firestore";
+import { uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
 const StyleWriting = styled.div`
   width: 970px;
@@ -27,10 +27,10 @@ const StyleWriting = styled.div`
   }
 
   .write-radioWrap {
-    input[type='radio'] {
+    input[type="radio"] {
       display: none;
     }
-    input[type='radio'] + label {
+    input[type="radio"] + label {
       position: relative;
       display: inline-block;
       width: 70px;
@@ -42,7 +42,7 @@ const StyleWriting = styled.div`
       margin-right: 10px;
       font-size: 14px;
     }
-    input[type='radio']:checked + label {
+    input[type="radio"]:checked + label {
       background-color: #f7f791;
       z-index: 1;
     }
@@ -97,7 +97,7 @@ const StyleWriting = styled.div`
       }
     }
 
-    input[type='file'] {
+    input[type="file"] {
       display: none;
     }
     label {
@@ -180,12 +180,12 @@ const Writing = () => {
     if (user) {
       // 이미지 파일 업로드
       const uploadTasks = imgFiles.map((file) => {
-        const storageRef = ref(storage, 'images/' + file.name); // 이미지 파일을 저장할 경로
+        const storageRef = ref(storage, "images/" + file.name); // 이미지 파일을 저장할 경로
         return uploadBytes(storageRef, file); // 이미지 파일 업로드 작업
       });
 
       // 현재 유저의 닉네임 값을 가져오기 위한 작업
-      const userDoc = doc(dbService, 'userNickname', user.uid); // user.uid를 가진 특정 문서에 대한 참조를 생성
+      const userDoc = doc(dbService, "userNickname", user.uid); // user.uid를 가진 특정 문서에 대한 참조를 생성
       const userSnapshot = await getDoc(userDoc);
       const data = userSnapshot.data();
 
@@ -195,7 +195,7 @@ const Writing = () => {
           snapshots.map((snapshot) => getDownloadURL(snapshot.ref))
         ); // 업로드된 이미지 파일들의 다운로드 URL 배열
 
-        await addDoc(collection(dbService, 'userWrite'), {
+        await addDoc(collection(dbService, "userWrite"), {
           checkedCategory: checkedCategory,
           title: title,
           content: content,
@@ -206,12 +206,12 @@ const Writing = () => {
         });
       });
     }
-    dispatch(setCheckedCategory('강아지'));
-    dispatch(setTitle(''));
-    dispatch(setContent(''));
+    dispatch(setCheckedCategory("강아지"));
+    dispatch(setTitle(""));
+    dispatch(setContent(""));
     setImgFiles([]);
     dispatch(setImgPreviews([]));
-    navigate('/community');
+    navigate("/community");
   };
   return (
     <StyleWriting>
@@ -224,7 +224,7 @@ const Writing = () => {
             type="radio"
             value="강아지"
             id="강아지"
-            checked={checkedCategory === '강아지'}
+            checked={checkedCategory === "강아지"}
             onChange={handleChangeCategory}
           />
           <label htmlFor="강아지">강아지</label>
@@ -232,7 +232,7 @@ const Writing = () => {
             type="radio"
             value="고양이"
             id="고양이"
-            checked={checkedCategory === '고양이'}
+            checked={checkedCategory === "고양이"}
             onChange={handleChangeCategory}
           />
           <label htmlFor="고양이">고양이</label>
@@ -240,7 +240,7 @@ const Writing = () => {
             type="radio"
             value="소동물"
             id="소동물"
-            checked={checkedCategory === '소동물'}
+            checked={checkedCategory === "소동물"}
             onChange={handleChangeCategory}
           />
           <label htmlFor="소동물">소동물</label>
@@ -248,7 +248,7 @@ const Writing = () => {
             type="radio"
             value="기타"
             id="기타"
-            checked={checkedCategory === '기타'}
+            checked={checkedCategory === "기타"}
             onChange={handleChangeCategory}
           />
           <label htmlFor="기타">기타</label>

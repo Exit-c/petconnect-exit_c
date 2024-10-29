@@ -1,1 +1,15 @@
+html {
+  padding: 0 12px;
+}
 
+@media (min-width: 768px) {
+  html {
+    padding: 0 20px;
+  }
+}
+
+@media (min-width: 970px) {
+  html {
+    padding: 0;
+  }
+}

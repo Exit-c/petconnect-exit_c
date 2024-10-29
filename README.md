@@ -1,12 +1,18 @@
-반려동물 커뮤니티 프로젝트
+# Petconnect
 
-**#사용한 기술**
+반려동물 커뮤니티 개인 프로젝트
+
+## 사용한 기술
 
 React, Redux, Typescript, StyledComponent, Firebase
 
-**#기능 설명**
+## 기능 설명
 
-Firebase의 Authentication, Firestore, Storage 를 활용하여 구현
+Firebase의 Authentication를 이용하여 유저 인증
+
+Firestore DB를 활용하여 유저의 닉네임과 게시글 저장
+
+Storage를 이용하여 이미지 저장
 
 - 로그인(email, 소셜로그인: 구글, 깃허브) 및 로그아웃
   
@@ -21,3 +27,7 @@ Firebase의 Authentication, Firestore, Storage 를 활용하여 구현
 - 내가 작성한 글 삭제기능
 
 - 커뮤니티 게시글 검색 기능
+
+## 배포 사이트
+
+https://petconnect-c.netlify.app/

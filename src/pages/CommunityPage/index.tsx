@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { setUserWriteData } from '../../redux/reducers/communityReducer';
-import styled from 'styled-components';
-import search from '../../images/free-icon-finder-4227126.png';
-import deleteIcon from '../../images/370086_bin_delete_empty_out_recycle_icon.png';
-import { authService, dbService } from '../../fbase';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { setUserWriteData } from "../../redux/reducers/communityReducer";
+import styled from "styled-components";
+import search from "../../images/free-icon-finder-4227126.png";
+import deleteIcon from "../../images/370086_bin_delete_empty_out_recycle_icon.png";
+import { authService, dbService } from "../../fbase";
 import {
   getDocs,
   collection,
@@ -17,12 +17,9 @@ import {
   startAfter,
   deleteDoc,
   doc,
-} from 'firebase/firestore';
+} from "firebase/firestore";
 
 const StyleCommunity = styled.div`
-  width: 970px;
-  margin: 0 auto;
-
   .community-search {
     width: 100%;
     padding-top: 50px;
@@ -64,9 +61,11 @@ const StyleCommunity = styled.div`
       top: -2px;
     }
   }
+
   .community-display {
     display: none;
   }
+
   .community-writeWrap {
     width: 100%;
     height: 200px;
@@ -151,6 +150,7 @@ const StyleCommunity = styled.div`
       }
     }
   }
+
   .community-more {
     text-align: center;
     font-size: 18px;
@@ -169,6 +169,11 @@ const StyleCommunity = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  @media (min-width: 970px) {
+    width: 970px;
+    margin: 0 auto;
+  }
 `;
 
 const Community = () => {
@@ -177,17 +182,17 @@ const Community = () => {
   const { userWriteData } = useAppSelector((state) => state.community);
 
   // 최신순, 내가작성한글 상태
-  const [radio, setRadio] = useState<string>('최신순');
+  const [radio, setRadio] = useState<string>("최신순");
   // 검색 상태
-  const [keyword, setKeyword] = useState<string>('');
+  const [keyword, setKeyword] = useState<string>("");
   // 글 바꾸기
-  const [text, setText] = useState<string>('');
+  const [text, setText] = useState<string>("");
   // 마지막으로 불러온 스냅샷 상태
   const [lastVisible, setLastVisible] = useState<DocumentData | null>(null);
   // 더보기 버튼 상태
-  const [moreButton, setMoreButton] = useState<string>('더보기');
+  const [moreButton, setMoreButton] = useState<string>("더보기");
   // 글 삭제 상태
-  const [showDisplay, setShowDisplay] = useState<string>('');
+  const [showDisplay, setShowDisplay] = useState<string>("");
   // 현재 사용자
   const user = authService.currentUser;
 
@@ -197,7 +202,7 @@ const Community = () => {
     const end = new Date();
 
     const seconds = Math.floor((end.getTime() - start.getTime()) / 1000);
-    if (seconds < 60) return '방금 전';
+    if (seconds < 60) return "방금 전";
 
     const minutes = seconds / 60;
     if (minutes < 60) return `${Math.floor(minutes)}분 전`;
@@ -224,20 +229,20 @@ const Community = () => {
   const onSubmitSearch = async (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    if (keyword !== '' && event.key === 'Enter') {
+    if (keyword !== "" && event.key === "Enter") {
       let q;
-      if (radio === '최신순') {
+      if (radio === "최신순") {
         q = query(
-          collection(dbService, 'userWrite'),
-          where('title', '>=', keyword),
-          where('title', '<=', keyword + '\uf8ff')
+          collection(dbService, "userWrite"),
+          where("title", ">=", keyword),
+          where("title", "<=", keyword + "\uf8ff")
         );
-      } else if (radio === '내가작성한글' && user && user.email) {
+      } else if (radio === "내가작성한글" && user && user.email) {
         q = query(
-          collection(dbService, 'userWrite'),
-          where('title', '>=', keyword),
-          where('title', '<=', keyword + '\uf8ff'),
-          where('userEmail', '==', user.email)
+          collection(dbService, "userWrite"),
+          where("title", ">=", keyword),
+          where("title", "<=", keyword + "\uf8ff"),
+          where("userEmail", "==", user.email)
         );
       }
 
@@ -248,8 +253,8 @@ const Community = () => {
           return { id: doc.id, ...docData };
         });
         dispatch(setUserWriteData(data));
-        setKeyword('');
-        setText('검색하신 결과가 없습니다');
+        setKeyword("");
+        setText("검색하신 결과가 없습니다");
       }
     }
   };
@@ -258,18 +263,18 @@ const Community = () => {
   const onClickMore = async () => {
     if (lastVisible) {
       let q;
-      if (radio === '최신순') {
+      if (radio === "최신순") {
         q = query(
-          collection(dbService, 'userWrite'),
-          orderBy('createAt', 'desc'),
+          collection(dbService, "userWrite"),
+          orderBy("createAt", "desc"),
           startAfter(lastVisible),
           limit(4)
         );
-      } else if (radio === '내가작성한글' && user && user.email) {
+      } else if (radio === "내가작성한글" && user && user.email) {
         q = query(
-          collection(dbService, 'userWrite'),
-          where('userEmail', '==', user.email),
-          orderBy('createAt', 'desc'),
+          collection(dbService, "userWrite"),
+          where("userEmail", "==", user.email),
+          orderBy("createAt", "desc"),
           startAfter(lastVisible),
           limit(4)
         );
@@ -286,7 +291,7 @@ const Community = () => {
           dispatch(setUserWriteData([...userWriteData, ...data])); // 기존 데이터를 유지하면서 새로운 데이터 추가
           setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
         } else {
-          setMoreButton('마지막 글입니다'); // 데이터가 없을 경우 '마지막 글입니다'로 알려줌
+          setMoreButton("마지막 글입니다"); // 데이터가 없을 경우 '마지막 글입니다'로 알려줌
         }
       }
     }
@@ -294,8 +299,8 @@ const Community = () => {
 
   // 내가 작성한 글 삭제하기
   const onClickDelete = async (id: string) => {
-    alert('글이 삭제되었습니다');
-    await deleteDoc(doc(dbService, 'userWrite', id));
+    alert("글이 삭제되었습니다");
+    await deleteDoc(doc(dbService, "userWrite", id));
     setShowDisplay(id);
   };
 
@@ -306,10 +311,10 @@ const Community = () => {
 
   useEffect(() => {
     const getUserWrite = async () => {
-      if (radio === '최신순') {
+      if (radio === "최신순") {
         const q = query(
-          collection(dbService, 'userWrite'),
-          orderBy('createAt', 'desc'),
+          collection(dbService, "userWrite"),
+          orderBy("createAt", "desc"),
           limit(4) // 최신순으로 정렬
         );
         const querySnapshot = await getDocs(q);
@@ -320,15 +325,15 @@ const Community = () => {
         });
 
         dispatch(setUserWriteData(data));
-        setText('첫 게시글의 주인공이 되어주세요!');
+        setText("첫 게시글의 주인공이 되어주세요!");
         setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
-        setMoreButton('더보기');
-      } else if (radio === '내가작성한글') {
+        setMoreButton("더보기");
+      } else if (radio === "내가작성한글") {
         if (user && user.email) {
           const q = query(
-            collection(dbService, 'userWrite'),
-            where('userEmail', '==', user.email),
-            orderBy('createAt', 'desc'),
+            collection(dbService, "userWrite"),
+            where("userEmail", "==", user.email),
+            orderBy("createAt", "desc"),
             limit(4) // 최신순으로 정렬
           );
           const querySnapshot = await getDocs(q);
@@ -338,13 +343,13 @@ const Community = () => {
           });
 
           dispatch(setUserWriteData(data));
-          setText('글을 작성해주세요!');
+          setText("글을 작성해주세요!");
           setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
-          setMoreButton('더보기');
+          setMoreButton("더보기");
         } else {
           // 로그인 상태가 아닐 시
-          alert('로그인이 필요합니다.');
-          navigete('/login');
+          alert("로그인이 필요합니다.");
+          navigete("/login");
         }
       }
     };
@@ -368,7 +373,7 @@ const Community = () => {
           type="radio"
           id="최신순"
           value="최신순"
-          checked={radio === '최신순'}
+          checked={radio === "최신순"}
           onChange={handleClickRadio}
         />
         <label htmlFor="최신순">최신 순</label>
@@ -376,7 +381,7 @@ const Community = () => {
           type="radio"
           id="내가작성한글"
           value="내가작성한글"
-          checked={radio === '내가작성한글'}
+          checked={radio === "내가작성한글"}
           onChange={handleClickRadio}
         />
         <label htmlFor="내가작성한글">내가 작성한 글</label>
@@ -388,15 +393,15 @@ const Community = () => {
               <div
                 className={
                   userData.id === showDisplay
-                    ? 'community-display'
-                    : 'community-writeWrap'
+                    ? "community-display"
+                    : "community-writeWrap"
                 }
                 key={index}
               >
                 <span className="commnunity-category">
                   {userData.checkedCategory}
                 </span>
-                {radio === '내가작성한글' && (
+                {radio === "내가작성한글" && (
                   <span
                     className="community-delete"
                     onClick={() => onClickDelete(userData.id)}

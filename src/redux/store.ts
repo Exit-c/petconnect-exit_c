@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import communitySlice from './reducers/communityReducer';
+import { configureStore } from "@reduxjs/toolkit";
+import communitySlice from "./reducers/communityReducer";
 
 export const store = configureStore({
   reducer: {
